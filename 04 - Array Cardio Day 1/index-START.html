@@ -31,28 +31,70 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    const response = inventors.filter(inventor => {
+      if (inventor.year >= 1500 && inventor.year < 1600) {
+        console.table(inventor);
+      }
+    });
+    console.log(response);
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
-
+    const names = inventors.map(inventor => {
+      console.log(inventor.first + ' ' +  inventor.last)
+    });
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    // const birthdates = inventors.map(inventor => inventor.year );
+    // console.log (birthdates.sort(function(a,b) {
+    //   return a - b
+    //   }));
+    console.table(inventors.sort(function(a,b) {
+      return a.year - b.year
+    })
+    )
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const lives = inventors.map(inventor => inventor.passed - inventor.year)
+    console.log(lives.reduce((a,b) => a + b,0));
 
     // 5. Sort the inventors by years lived
-
+    console.table(inventors.sort(function(a,b) {
+      return (a.passed - a.year) - (b.passed - b.year)
+    })
+    )
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // const category = document.querySelector('mw-category');
+    // console.log(category);
+    // const liens = Array.from(category.querySelectorAll('a'));
+    // const texts = liens.forEach(lien => {
+      // lien.innerText
+    // });
+    // texts.map(text => {
+      // if (text.includes('de')) {
+        // console.log(text)
+      // }
+    // })
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+    console.log(people.sort(function (a,b) {
+      return a - b
+    }));
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const sum = data.reduce(function(objet, index) {
+      if (!objet[index]) {
+        objet[index] = 0 }
+        else {
+          objet[index]++;
+        }
+   }, {});
+console.log(sum);
 
   </script>
 </body>
