@@ -5,26 +5,23 @@
   <title>HTML5 Canvas</title>
 </head>
 <body>
-<form action="" method="post" class="form-example">
-  <div class="form-example">
-    <label for="name">Choisis ta couleur </label>
-    <input type="text" name="name" id="name" required>
-  </div>
-  <div class="form-example">
-    <input type="submit" value="Valider">
-  </div>
-</form>
-<canvas id="draw" width="800" height="800"></canvas>
+  <input type="text" placeholder="Choose a color" id="color"> <br>
+  <input type="text" placeholder="Set the width of the line between 1 and 100" id="line" style="width: 250px"> <br>
+  <button type="button" onclick="getInputValue()">Valider</button>
+  <canvas id="draw" width="800" height="800"></canvas>
 <script>
-const color = document.querySelector('#name');
+  function getInputValue() {
+   ctx.strokeStyle = document.querySelector('#color').value ;
+   ctx.lineWidth = document.querySelector('#line').value ;
+  };
 const canvas = document.querySelector('#draw');
 const ctx = canvas.getContext('2d'); // dessin en 2d
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-ctx.strokeStyle = 'blue'; // définir la couleur au départ
 ctx.lineJoin = 'round'; // définit la forme utilisée pour joindre 2 segments de ligne
 ctx.lineCap = 'round';  // définit comment les extremites d'une ligne sont dessinées
-ctx.lineWidth = 60; // définit l'epaisseur du trait
+// ctx.strokeStyle = 'blue'; definit la couleur du trait
+// ctx.lineWidth = 60; définit l'epaisseur du trait
 
 let isDrawing = false; // variable pour dire qu'on ne dessine pas au départ, et qu'on pourra changer quand on veut dessiner
 let lastX = 0; // position du curseur en X
@@ -33,7 +30,6 @@ let lastY = 0;  // position du curseur en Y
 function draw(e) {
   if (!isDrawing) return; // stop la fonction quand pas de mousedown
   console.log(e);
-  ctx.strokeStyle = ` ${color.value} ` ;
   ctx.beginPath(); // cree un nouveau trajet
   ctx.moveTo(lastX,lastY); // set le point de depart avec les coordonnees x et y
   ctx.lineTo(e.offsetX, e.offsetY); // set les coordonnées d'arrivee (offsetX et Y sont des cles de l'event trouvees ds la console)
