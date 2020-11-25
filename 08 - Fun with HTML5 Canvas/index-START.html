@@ -5,8 +5,49 @@
   <title>HTML5 Canvas</title>
 </head>
 <body>
+<form action="" method="post" class="form-example">
+  <div class="form-example">
+    <label for="name">Choisis ta couleur </label>
+    <input type="text" name="name" id="name" required>
+  </div>
+  <div class="form-example">
+    <input type="submit" value="Valider">
+  </div>
+</form>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+const color = document.querySelector('#name');
+const canvas = document.querySelector('#draw');
+const ctx = canvas.getContext('2d'); // dessin en 2d
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+ctx.strokeStyle = 'blue'; // définir la couleur au départ
+ctx.lineJoin = 'round'; // définit la forme utilisée pour joindre 2 segments de ligne
+ctx.lineCap = 'round';  // définit comment les extremites d'une ligne sont dessinées
+ctx.lineWidth = 60; // définit l'epaisseur du trait
+
+let isDrawing = false; // variable pour dire qu'on ne dessine pas au départ, et qu'on pourra changer quand on veut dessiner
+let lastX = 0; // position du curseur en X
+let lastY = 0;  // position du curseur en Y
+
+function draw(e) {
+  if (!isDrawing) return; // stop la fonction quand pas de mousedown
+  console.log(e);
+  ctx.strokeStyle = ` ${color.value} ` ;
+  ctx.beginPath(); // cree un nouveau trajet
+  ctx.moveTo(lastX,lastY); // set le point de depart avec les coordonnees x et y
+  ctx.lineTo(e.offsetX, e.offsetY); // set les coordonnées d'arrivee (offsetX et Y sont des cles de l'event trouvees ds la console)
+  ctx.stroke(); // dessin la forme
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+}
+
+canvas.addEventListener('mousedown', (e) => {
+  isDrawing = true; //dessine quand la souris est down
+  [lastX, lastY] = [e.offsetX, e.offsetY]; // update les coordonnees de depart à l'endroit ou la souris est down
+});
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', (e) => isDrawing = false); // ne dessine pas quand la souris est up
+canvas.addEventListener('mouseout', (e) => isDrawing = false); // ne dessine pas quand la souris est out of screen
 </script>
 
 <style>
