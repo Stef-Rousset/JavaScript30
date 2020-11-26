@@ -9,7 +9,7 @@
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
   <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'Hugo', age: 8 }];
 
     function makeGreen() {
       const p = document.querySelector('p');
@@ -18,29 +18,47 @@
     }
 
     // Regular
+    console.log('hello');
 
-    // Interpolated
-
-    // Styled
-
+    // Interpolated : %s permet d'interpoler et affiche ce qu'on passe en second argument
+    console.log("hello I am %s", "stéphanie");
+    // Styled : %c permet de mettre du style passé en 2eme argument au texte
+    console.log("%c Cool text", "font-size: 30px; color:red");
     // warning!
-
+    console.warn("be careful");
     // Error :|
-
+    console.error("wrong number of arguments");
     // Info
-
-    // Testing
-
+    console.info("you are a great developer");
+    // Testing verifie avec assert que c true ou false et renvoie la string passee en 2eme argument
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('waou'), 'wrong');
     // clearing
-
-    // Viewing DOM Elements
-
+    console.clear();
+    // Viewing DOM Elements montre ttes les proprietes qui s'appliquent à l'elelement
+    console.dir(p);
+    console.clear();
     // Grouping together
-
-    // counting
-
+    dogs.forEach(dog => {
+      // il existe aussi .group qui affiche tt, .groupCollapsed permet de cacher et d'afficher en cliqunt sur un carret
+      console.groupCollapsed(`${dog.name}`); // demarre le groupe nommé ...
+      console.log(`${dog.name}`);
+      console.log(`${dog.age}`);
+      console.groupEnd(`${dog.name}`); // termine le groupe nommé ...
+    });
+    // counting compte le nb de fois où on a affcihé Stef
+    console.count('Stef');
+    console.count('Stef');
+    console.count('Stef');
     // timing
+    console.time('counting Stef'); // demarre le chrono
+    console.count('Stef');
+    console.count('Stef');
+    console.count('Stef');
+    console.timeEnd('counting Stef'); // arrete le chrono et affiche le resultat
 
+    // tableau
+    console.table(dogs);
   </script>
 </body>
 </html>
