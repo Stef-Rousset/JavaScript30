@@ -96,6 +96,30 @@
   </div>
 
 <script>
+  let lastChecked ; // definir une variable vide
+
+  function handleCheck(event){
+    let inBetween = false; // definir une variable à flase qu'on passera à true quand on sera
+                         // entre les 2 checkboxes
+    // verifier si la shiftKey est enfoncee pr permettre de tt selcectionner
+    // ET verifier si checked est true
+    if(event.shiftKey && this.checked) {
+      checkboxes.forEach(checkbox => {
+        if (checkbox === this || checkbox === lastChecked) {
+          inBetween = !inBetween;
+        }
+
+        if (inBetween) {
+          checkbox.checked = true;
+        }
+      });
+    }
+    lastChecked = this; // au premier clic, la fonction handleCheck tourne et ne rentre pas
+                        // ds le if donc lastChecked est setté à this. Au 2eme clic, on rentre
+                        // dans le if la key shift est enfoncée par l'user et this est checked
+  }
+  const checkboxes = document.querySelectorAll('.item input[type = checkbox]');
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 </script>
 </body>
 </html>
