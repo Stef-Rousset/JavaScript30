@@ -8,7 +8,7 @@
   function togglePlay() {
     if (video.paused){        // propriete .paused boolean
       video.play();          // propriete .play lanc la video
-      buttonPlayer.textContent = '►'
+      buttonPlayer.textContent = '►' // .textContent equivaut à innerText
     }
     else {
       video.pause();
