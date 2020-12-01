@@ -7,6 +7,17 @@
 </head>
 <body>
 <script>
+  const pressedArray = [];
+  const secretCode = 'comics';
+  window.addEventListener('keyup', event => {
+    console.log(event.key);
+    pressedArray.push(event.key);
+    pressedArray.splice(-secretCode, pressedArray.length - secretCode.length);
+    if (pressedArray.join('').includes(secretCode)) {
+      cornify_add();
+    };
+    console.log(pressedArray);
+  });
 </script>
 </body>
 </html>
