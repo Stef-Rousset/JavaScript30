@@ -57,7 +57,23 @@
         if (callNow) func.apply(context, args);
       };
     }
-
+     const slideImages = document.querySelectorAll('.slide-in');
+     function slide (event){
+      slideImages.forEach(slideImage => {
+      // dist when scroll à la moitié de l'img
+        // window.scrollY donne en px la distance scrollee par rapport au top de la page
+        // windox.innerHeigth donne en pax la hauteur totale de la page
+        const slideInAt = (window.scrollY + window.innerHeight) - // donne la distance en bas de page
+                          (slideImage.height / 2) ; //  la moitié de la taille de l'img
+      // bas de l'img
+        const imageBottom = slideImage.offsetTop + slideImage.height; // offsetTop donne la dist par rapport au top de la page
+        const isHalfShown = slideInAt > slideImage.offsetTop;
+      if (isHalfShown) {
+        slideImage.classList.add('active');
+      }
+      });
+     }
+     window.addEventListener('scroll', debounce(slide));
   </script>
 
   <style>
@@ -68,11 +84,11 @@
       font-size: 20px;
       font-weight: 200;
     }
-    
+
     body {
       margin: 0;
     }
-    
+
     *, *:before, *:after {
       box-sizing: inherit;
     }
@@ -107,7 +123,7 @@
     .align-left.slide-in {
       transform: translateX(-30%) scale(0.95);
     }
-    
+
     .align-right.slide-in {
       transform: translateX(30%) scale(0.95);
     }
