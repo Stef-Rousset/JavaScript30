@@ -9,14 +9,18 @@
 <script>
   const pressedArray = [];
   const secretCode = 'comics';
-  window.addEventListener('keyup', event => {
+  window.addEventListener('keyup', function(event) {
     console.log(event.key);
     pressedArray.push(event.key);
-    pressedArray.splice(-secretCode, pressedArray.length - secretCode.length);
+    pressedArray.splice(-secretCode.length -1, pressedArray.length - secretCode.length);
+    // [a,b,c,d,e,f,g,h,i,j]
+    // à partir de l'index -7, enlever 10-4 elements donc ça enleve d,c,b,a
+    // renvoit un array avec les 6 derniers elements
     if (pressedArray.join('').includes(secretCode)) {
       cornify_add();
     };
     console.log(pressedArray);
+    // console.log(-secretCode.length -1);  egal a -7
   });
 </script>
 </body>
